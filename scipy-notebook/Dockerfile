@@ -49,6 +49,8 @@ RUN conda install --quiet --yes \
     # Also activate ipywidgets extension for JupyterLab
     jupyter labextension install @jupyter-widgets/jupyterlab-manager@^0.33.1 && \
     jupyter labextension install jupyterlab_bokeh@^0.4.0 && \
+    jupyter labextension install @jupyterlab/hub-extension && \
+    jupyter labextension install @jupyterlab/geojson-extension jupyterlab-drawio && \
     npm cache clean && \
     rm -rf $CONDA_DIR/share/jupyter/lab/staging && \
     rm -rf /home/$NB_USER/.cache/yarn && \
