@@ -41,6 +41,8 @@ RUN conda install --quiet --yes \
     'vincent=0.4.*' \
     'beautifulsoup4=4.5.*' \
     'protobuf=3.*' \
+    'lifetimes' \
+    'geotiler' \
     'xlrd'  && \
     conda remove --quiet --yes --force qt pyqt && \
     conda clean -tipsy && \
