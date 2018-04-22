@@ -41,8 +41,6 @@ RUN conda install --quiet --yes \
     'vincent=0.4.*' \
     'beautifulsoup4=4.5.*' \
     'protobuf=3.*' \
-    'lifetimes' \
-    'geotiler' \
     'xlrd'  && \
     conda remove --quiet --yes --force qt pyqt && \
     conda clean -tipsy && \
@@ -57,6 +55,9 @@ RUN conda install --quiet --yes \
     rm -rf /home/$NB_USER/.node-gyp && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
+
+RUN pip install lifetimes && pip install geotiler
+
 
 # Install facets which does not have a pip or conda package at the moment
 RUN cd /tmp && \
