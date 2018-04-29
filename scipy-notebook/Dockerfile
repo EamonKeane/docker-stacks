@@ -58,8 +58,10 @@ RUN conda install --quiet --yes \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
-RUN pip install lifetimes && pip install geotiler
-
+RUN pip install lifetimes && pip install geotiler && pip install cx_Oracle && pip install sshtunnel
+# Install setup ssh:
+RUN apt-get install -y openssh-client
+RUN mkdir -p /home/jovyan/.ssh
 
 # Install facets which does not have a pip or conda package at the moment
 RUN cd /tmp && \
