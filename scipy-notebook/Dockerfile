@@ -6,13 +6,25 @@ LABEL maintainer="Jupyter Project <jupyter@googlegroups.com>"
 
 USER root
 
+#RUN export LD_LIBRARY_PATH=/opt/oracle/instantclient_12_2:$LD_LIBRARY_PATH
+
 # libav-tools for matplotlib anim
+# libaio1 and unzip for oracle
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends libav-tools openssh-client && \
+    apt-get install -y --no-install-recommends libav-tools openssh-client libaio1 unzip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /home/jovyan/.ssh
+# To install oracle
+# https://oracle.github.io/odpi/doc/installation.html#oracle-instant-client-zip
+
+RUN mkdir -p /opt/oracle
+RUN cd /opt/oracle
+COPY instantclient-basic-linux.x64-12.2.0.1.0.zip .
+RUN unzip instantclient-basic-linux.x64-12.2.0.1.0.zip
+
+RUN sh -c "echo /opt/oracle/instantclient_12_2 > /etc/ld.so.conf.d/oracle-instantclient.conf"
+RUN ldconfig
 
 USER $NB_UID
 
