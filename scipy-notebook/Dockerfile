@@ -8,11 +8,10 @@ USER root
 
 # libav-tools for matplotlib anim
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends libav-tools && \
+    apt-get install -y --no-install-recommends libav-tools openssh-client && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN apt-get install -y openssh-client
 RUN mkdir -p /home/jovyan/.ssh
 
 USER $NB_UID
