@@ -49,13 +49,15 @@ RUN conda install --quiet --yes \
     # Also activate ipywidgets extension for JupyterLab
     jupyter labextension install @jupyter-widgets/jupyterlab-manager@^0.35 && \
     jupyter labextension install jupyterlab_bokeh@^0.5.0 && \
-    npm cache clean && \
+    jupyter labextension install @jupyterlab/geojson-extension && \
+    jupyter labextension install @jupyterlab/hub-extension && \
+    npm cache clean --force && \
     rm -rf $CONDA_DIR/share/jupyter/lab/staging && \
     rm -rf /home/$NB_USER/.cache/yarn && \
     rm -rf /home/$NB_USER/.node-gyp && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
-
+    
 RUN pip install lifetimes && pip install geotiler && pip install cx_Oracle && pip install sshtunnel
 # Install setup ssh:
 RUN apt-get install -y openssh-client
@@ -66,7 +68,8 @@ RUN cd /tmp && \
     git clone https://github.com/PAIR-code/facets.git && \
     cd facets && \
     jupyter nbextension install facets-dist/ --sys-prefix && \
-    rm -rf facets && \
+    cd && \
+    rm -rf /tmp/facets && \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
 
