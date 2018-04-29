@@ -12,6 +12,9 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN apt-get install -y openssh-client
+RUN mkdir -p /home/jovyan/.ssh
+
 USER $NB_UID
 
 # Install Python 3 packages
@@ -49,6 +52,8 @@ RUN conda install --quiet --yes \
     # Also activate ipywidgets extension for JupyterLab
     jupyter labextension install @jupyter-widgets/jupyterlab-manager@^0.35 && \
     jupyter labextension install jupyterlab_bokeh@^0.5.0 && \
+    jupyter labextension install @jupyterlab/hub-extension && \
+    jupyter labextension install @jupyterlab/geojson-extension && \
     npm cache clean --force && \
     rm -rf $CONDA_DIR/share/jupyter/lab/staging && \
     rm -rf /home/$NB_USER/.cache/yarn && \
@@ -58,8 +63,6 @@ RUN conda install --quiet --yes \
     
 RUN pip install lifetimes && pip install geotiler && pip install cx_Oracle && pip install sshtunnel
 # Install setup ssh:
-RUN apt-get install -y openssh-client
-RUN mkdir -p /home/jovyan/.ssh
 
 # Install facets which does not have a pip or conda package at the moment
 RUN cd /tmp && \
