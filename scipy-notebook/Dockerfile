@@ -15,16 +15,16 @@ RUN apt-get update && \
 
 # To install oracle along with sqlplus
 # https://oracle.github.io/odpi/doc/installation.html#oracle-instant-client-zip
+# https://docs.oracle.com/cd/B19306_01/server.102/b14357/ape.htm
+
+COPY instantclient_12_2.zip /home/
+RUN unzip /home/instantclient_12_2.zip -d /home/
+
+ENV LD_LIBRARY_PATH=/home/instantclient_12_2
+ENV PATH=/home/instantclient_12_2:${PATH}
+ENV SQLPATH=/home/instantclient_12_2:${SQLPATH}
 
 USER $NB_UID
-
-COPY instantclient_12_2.zip .
-RUN unzip instantclient_12_2.zip
-
-#RUN sh -c "echo /opt/oracle/instantclient_12_2 > /etc/ld.so.conf.d/oracle-instantclient.conf"
-#RUN ldconfig
-ENV LD_LIBRARY_PATH=/home/jovyan/instantclient_12_2
-
 
 # Install Python 3 packages
 # Remove pyqt and qt pulled in for matplotlib since we're only ever going to
@@ -70,7 +70,7 @@ RUN conda install --quiet --yes \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
     
-RUN pip install lifetimes && pip install geotiler && pip install cx_Oracle && pip install sshtunnel
+RUN pip install lifetimes && pip install geotiler && pip install cx_Oracle && pip install sshtunnel && pip install ipython-sql
 # Install setup ssh:
 
 # Install facets which does not have a pip or conda package at the moment
