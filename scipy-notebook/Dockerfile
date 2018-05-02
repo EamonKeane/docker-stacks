@@ -70,7 +70,17 @@ RUN conda install --quiet --yes \
     fix-permissions $CONDA_DIR && \
     fix-permissions /home/$NB_USER
     
-RUN pip install lifetimes && pip install geotiler && pip install cx_Oracle && pip install sshtunnel && pip install ipython-sql
+RUN pip install lifetimes && \
+    pip install geotiler && \
+    pip install cx_Oracle && \
+    pip install sshtunnel && \
+    pip install ipython-sql && \
+    pip install jupyter_contrib_nbextensions && \
+    pip install jupyter_nbextensions_configurator && \
+    jupyter contrib nbextension install --user && \
+    jupyter nbextensions_configurator enable --user && \
+    jupyter nbextension enable varInspector/main
+
 # Install setup ssh:
 
 # Install facets which does not have a pip or conda package at the moment
