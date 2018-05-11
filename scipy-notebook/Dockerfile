@@ -63,6 +63,7 @@ RUN conda install --quiet --yes \
     jupyter labextension install jupyterlab_bokeh@^0.5.0 && \
     jupyter labextension install @jupyterlab/hub-extension && \
     jupyter labextension install @jupyterlab/geojson-extension && \
+    jupyter labextension install jupyter-leaflet && \
     jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
     npm cache clean --force && \
     rm -rf $CONDA_DIR/share/jupyter/lab/staging && \
