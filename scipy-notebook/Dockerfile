@@ -63,6 +63,7 @@ RUN conda install --quiet --yes \
     jupyter labextension install jupyterlab_bokeh@^0.5.0 && \
     jupyter labextension install @jupyterlab/hub-extension && \
     jupyter labextension install @jupyterlab/geojson-extension && \
+    jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
     npm cache clean --force && \
     rm -rf $CONDA_DIR/share/jupyter/lab/staging && \
     rm -rf /home/$NB_USER/.cache/yarn && \
@@ -76,10 +77,12 @@ RUN pip install lifetimes && \
     pip install sshtunnel && \
     pip install ipython-sql && \
     pip install babel && \
+    pip install gmaps && \
     pip install jupyter_contrib_nbextensions && \
     pip install jupyter_nbextensions_configurator && \
     jupyter contrib nbextension install --user && \
     jupyter nbextensions_configurator enable --user && \
+    
     jupyter nbextension enable varInspector/main
 
 # Install setup ssh:
