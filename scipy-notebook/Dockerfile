@@ -82,8 +82,8 @@ RUN pip install lifetimes && \
     pip install jupyter_nbextensions_configurator && \
     jupyter contrib nbextension install --user && \
     jupyter nbextensions_configurator enable --user && \
-    
-    jupyter nbextension enable varInspector/main
+    jupyter nbextension enable varInspector/main && \
+    jupyter lab build
 
 # Install setup ssh:
 
