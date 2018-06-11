@@ -9,7 +9,7 @@ USER root
 # libav-tools for matplotlib anim
 # libaio1 and unzip for oracle
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends libav-tools openssh-client libaio1 libaio-dev unzip && \
+    apt-get install -y --no-install-recommends build-dep python-psycopg2 libav-tools openssh-client libaio1 libaio-dev unzip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -54,6 +54,7 @@ RUN conda install --quiet --yes \
     'beautifulsoup4=4.5.*' \
     'protobuf=3.*' \
     'xlrd'  && \
+    'psycopg2' && \
     conda remove --quiet --yes --force qt pyqt && \
     conda clean -tipsy && \
     # Activate ipywidgets extension in the environment that runs the notebook server
