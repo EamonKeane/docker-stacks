@@ -11,10 +11,10 @@ USER root
 #     apt-get -y remove python-pip python-dev && \
 #     apt-get -y autoremove
 
-# libav-tools for matplotlib anim
+# ffmpeg for matplotlib anim
 # libaio1 and unzip for oracle
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends libpq-dev libav-tools openssh-client libaio1 libaio-dev unzip && \
+    apt-get install -y --no-install-recommends libpq-dev ffmpeg openssh-client libaio1 libaio-dev unzip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
