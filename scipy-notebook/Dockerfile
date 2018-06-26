@@ -70,6 +70,7 @@ RUN conda install --quiet --yes \
     jupyter labextension install @jupyterlab/geojson-extension && \
     jupyter labextension install jupyter-leaflet && \
     jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
+    jupyter labextension install qgrid && \
     npm cache clean --force && \
     rm -rf $CONDA_DIR/share/jupyter/lab/staging && \
     rm -rf /home/$NB_USER/.cache/yarn && \
@@ -85,6 +86,7 @@ RUN pip install lifetimes && \
     pip install babel && \
     pip install gmaps && \
     pip install psycopg2 && \
+    pip install qgrid && \
     pip install jupyter_contrib_nbextensions && \
     pip install jupyter_nbextensions_configurator && \
     jupyter contrib nbextension install --user && \
@@ -110,7 +112,7 @@ RUN MPLBACKEND=Agg python -c "import matplotlib.pyplot" && \
     fix-permissions /home/$NB_USER
 
 #Add cloudsql-proxy
-RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O /cloud_sql_proxy
-RUN chmod +x /cloud_sql_proxy
+RUN wget https://dl.google.com/cloudsql/cloud_sql_proxy.linux.amd64 -O //home/$NB_USER/cloud_sql_proxy
+RUN chmod +x /home/$NB_USER/cloud_sql_proxy
 
 USER $NB_UID
